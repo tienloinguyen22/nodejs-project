@@ -65,3 +65,8 @@ local_storage
 
 # uploads
 uploads/*
+
+# env
+.env*
+.env
+firebase-adminsdk.json
