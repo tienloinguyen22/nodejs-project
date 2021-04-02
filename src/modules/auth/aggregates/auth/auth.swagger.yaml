@@ -1,0 +1,54 @@
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginPayload'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+    LoginPayload:
+      type: object
+      properties:
+        idToken:
+          type: string
+        fullName:
+          type: string
+        email:
+          type: string
+        phoneNo:
+          type: string
+        avatarUrl:
+          type: string
+        dob:
+          type: string
+        address:
+          type: string
+        gender:
+          type: string

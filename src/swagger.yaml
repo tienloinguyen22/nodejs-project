@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: Pets Hotel API
+  description: API
+  contact:
+    email: tienloinguyen22@gmail.com
+  license:
+    name: Pets Hotel
+    url: https://petshotel.vn/privacy-policy
+  version: 0.1.0
+servers:
+  - url: http://localhost:3000/api
+tags:
+  - name: Auth
+    description: Auth operations
+  - name: Profile
+    description: Profile operations
+  - name: Uploads
+    description: Uploads operations
+  - name: Breeds
+    description: Breeds operations
+  - name: Pets
+    description: Pets operations
+  - name: Branches
+    description: Branches operations
+  - name: Services
+    description: Services operations
+  - name: Bookings
+    description: Bookings operations
+  - name: Device tokens
+    description: Device tokens operations
+  - name: Notifications
+    description: Notifications operations

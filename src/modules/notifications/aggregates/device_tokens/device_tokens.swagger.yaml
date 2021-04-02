@@ -1,0 +1,55 @@
+paths:
+  /device-tokens/{token}:
+    delete:
+      tags:
+        - Device tokens
+      summary: Delete device token
+      operationId: deleteDeviceToken
+      parameters:
+        - name: token
+          in: path
+          description: Token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+  /device-tokens:
+    post:
+      tags:
+        - Device tokens
+      summary: Create device token
+      operationId: createDeviceToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceTokenPayload'
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+components:
+  schemas:
+    CreateDeviceTokenPayload:
+      type: object
+      properties:
+        token:
+          type: string

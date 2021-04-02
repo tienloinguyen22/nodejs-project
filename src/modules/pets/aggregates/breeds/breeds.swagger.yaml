@@ -1,0 +1,95 @@
+paths:
+  /breeds:
+    get:
+      tags:
+        - Breeds
+      summary: Find breeds
+      operationId: findBreeds
+      parameters:
+        - name: search
+          in: query
+          description: Search keyword
+          required: false
+          schema:
+            type: string
+        - name: species
+          in: query
+          description: Species filter
+          required: false
+          schema:
+            type: string
+        - name: isActive
+          in: query
+          description: Status filter
+          required: false
+          schema:
+            type: boolean
+        - name: pageNumber
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: number
+            default: 20
+        - name: pageSize
+          in: query
+          description: Page size
+          required: false
+          schema:
+            type: number
+            default: 1
+        - name: sortBy
+          in: query
+          description: Sort field
+          required: false
+          schema:
+            type: string
+            default: createdAt_desc
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindBreedsResult'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+components:
+  schemas:
+    Breed:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        species:
+          type: string
+          enum: [DOG, CAT]
+        imageUrl:
+          type: string
+        isActive:
+          type: boolean
+        createdAt:
+          type: number
+        createdBy:
+          type: string
+        lastModifiedAt:
+          type: number
+        lastModifiedBy:
+          type: string
+    FindBreedsResult:
+      type: object
+      properties:
+        total:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breed'

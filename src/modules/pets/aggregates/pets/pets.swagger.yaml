@@ -1,0 +1,267 @@
+paths:
+  /pets/{id}:
+    delete:
+      tags:
+        - Pets
+      summary: Delete pet
+      operationId: deletePet
+      parameters:
+        - name: id
+          in: path
+          description: Pet ID
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+    patch:
+      tags:
+        - Pets
+      summary: Update pet
+      operationId: updatePet
+      parameters:
+        - name: id
+          in: path
+          description: Pet ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePetPayload'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+  /pets:
+    post:
+      tags:
+        - Pets
+      summary: Create pet
+      operationId: createPet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePetPayload'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - Pets
+      summary: Find pets
+      operationId: findPets
+      parameters:
+        - name: search
+          in: query
+          description: Search keyword
+          required: false
+          schema:
+            type: string
+        - name: species
+          in: query
+          description: Species filter
+          required: false
+          schema:
+            type: string
+        - name: breed
+          in: query
+          description: Breed filter
+          required: false
+          schema:
+            type: string
+        - name: pageNumber
+          in: query
+          description: Page number
+          required: false
+          schema:
+            type: number
+            default: 20
+        - name: pageSize
+          in: query
+          description: Page size
+          required: false
+          schema:
+            type: number
+            default: 1
+        - name: sortBy
+          in: query
+          description: Sort field
+          required: false
+          schema:
+            type: string
+            default: createdAt_desc
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindPetsResult'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+components:
+  schemas:
+    UpdatePetPayload:
+      type: object
+      properties:
+        name:
+          type: string
+        species:
+          type: string
+        breed:
+          type: string
+        avatarUrl:
+          type: string
+        dob:
+          type: string
+        gender:
+          type: string
+        weight:
+          type: number
+        allergies:
+          type: string
+        vetName:
+          type: string
+        vetPhoneNo:
+          type: string
+        vetAddress:
+          type: string
+        vaccinationDue:
+          type: string
+        dewormDue:
+          type: string
+        proofOfCurrentVaccinations:
+          type: array
+          items:
+            type: string
+    CreatePetPayload:
+      type: object
+      properties:
+        name:
+          type: string
+        species:
+          type: string
+        breed:
+          type: string
+        avatarUrl:
+          type: string
+        dob:
+          type: string
+        gender:
+          type: string
+        weight:
+          type: number
+        allergies:
+          type: string
+        vetName:
+          type: string
+        vetPhoneNo:
+          type: string
+        vetAddress:
+          type: string
+        vaccinationDue:
+          type: string
+        dewormDue:
+          type: string
+        proofOfCurrentVaccinations:
+          type: array
+          items:
+            type: string
+    Pet:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        species:
+          type: string
+          enum: [DOG, CAT]
+        breed:
+          $ref: '#/components/schemas/Breed'
+        avatarUrl:
+          type: string
+        dob:
+          type: string
+        gender:
+          type: string
+          enum: [NEUTERIZED, MALE, FEMALE]
+        weight:
+          type: number
+        allergies:
+          type: string
+        vetName:
+          type: string
+        vetPhoneNo:
+          type: string
+        vetAddress:
+          type: string
+        vaccinationDue:
+          type: string
+        dewormDue:
+          type: string
+        proofOfCurrentVaccinations:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: number
+        createdBy:
+          type: string
+        lastModifiedAt:
+          type: number
+        lastModifiedBy:
+          type: string
+    FindPetsResult:
+      type: object
+      properties:
+        total:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pet'

@@ -1,0 +1,25 @@
+paths:
+  /uploads/images/{filename}:
+    delete:
+      tags:
+        - Uploads
+      summary: Delete image
+      operationId: deleteImage
+      parameters:
+        - name: filename
+          in: path
+          description: File name
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []

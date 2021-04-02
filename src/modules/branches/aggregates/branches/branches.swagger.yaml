@@ -1,0 +1,113 @@
+paths:
+  /branches/{id}:
+    patch:
+      tags:
+        - Branches
+      summary: Update branch
+      operationId: updateBranch
+      parameters:
+        - name: id
+          in: path
+          description: Branch ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBranchPayload'
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Branch'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+  /branches/find-all:
+    get:
+      tags:
+        - Branches
+      summary: Find all branches
+      operationId: findAllBranches
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FindBranchesResult'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+        - Bearer: []
+components:
+  schemas:
+    UpdateBranchPayload:
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          type: string
+        description:
+          $ref: '#/components/schemas/Description'
+        phoneNumber:
+          type: string
+        availableServices:
+          type: array
+          items:
+            type: string
+    Branch:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        avatarImageUrl:
+          type: string
+        locationImageUrl:
+          type: string
+        description:
+          $ref: '#/components/schemas/Description'
+        phoneNumber:
+          type: string
+        availableServices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+        isActive:
+          type: boolean
+        createdAt:
+          type: number
+        createdBy:
+          type: string
+        lastModifiedAt:
+          type: number
+        lastModifiedBy:
+          type: string
+    FindBranchesResult:
+      type: object
+      properties:
+        total:
+          type: number
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Branch'

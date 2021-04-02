@@ -1,0 +1,32 @@
+components:
+  schemas:
+    Permission:
+      type: object
+      properties:
+        permission:
+          type: string
+        scope:
+          type: string
+    Role:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        isActive:
+          type: boolean
+        createdAt:
+          type: number
+        createdBy:
+          type: string
+        lastModifiedAt:
+          type: number
+        lastModifiedBy:
+          type: string
