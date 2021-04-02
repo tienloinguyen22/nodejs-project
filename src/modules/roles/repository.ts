@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
-import { addAuditableSchema, MongoRepository } from '@app/core';
-import { Role } from '../types';
+import { addAuditableSchema, MongoRepository } from '../../core';
+import { Role } from './interfaces';
 
 const RoleSchema = new mongoose.Schema(
   addAuditableSchema({

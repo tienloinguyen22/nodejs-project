@@ -1,9 +1,10 @@
 import admin from 'firebase-admin';
 import { StatusCodes } from 'http-status-codes';
-import { ApiError, createObjectId, getCurrentTimestampInMilliseconds, LoginTypes, roleIds } from '../../core';
-import { rolesRepository } from '../../repositories/role';
-import { usersRepository } from '../../repositories/user';
-import { LoginPayload, User } from '../../types';
+import { ApiError, createObjectId, getCurrentTimestampInMilliseconds, LoginTypes, roleIds } from '../../../core';
+import { rolesRepository } from '../../roles/repository';
+import { User } from '../../users/interfaces';
+import { usersRepository } from '../../users/repository';
+import { LoginPayload } from '../interfaces';
 
 export const login = async (payload: LoginPayload): Promise<User> => {
   const verifyIdToken = await admin.auth().verifyIdToken(payload.idToken);

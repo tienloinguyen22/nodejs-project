@@ -2,8 +2,8 @@ import { Router, Response, Request, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
 import { Genders, regex, validate } from '../../core';
-import { authService } from '../../services/auth';
-import { LoginPayload } from '../../types';
+import { LoginPayload } from './interfaces';
+import { authService } from './services';
 
 const route = Router();
 
