@@ -1,4 +1,4 @@
-import { IsAuditable } from '../../core';
+import { IsAuditable } from '../../../core';
 import { Permission } from './permission';
 
 export interface Role extends IsAuditable {

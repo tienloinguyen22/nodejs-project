@@ -1,4 +1,4 @@
-import { Genders, ISODate } from '../../core';
+import { Genders, ISODate } from '../../../core';
 
 export interface LoginPayload {
   idToken: string;
