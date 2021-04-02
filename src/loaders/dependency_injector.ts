@@ -6,7 +6,7 @@ import { agendaFactory } from './agenda_factory';
 import { configs } from '../configs';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const dependencyInjector = ({ mongoConnection, models }: any): { agenda: Agenda.Agenda } => {
+export const dependencyInjector = ({ mongoConnection, models }: any): { agenda: Agenda } => {
   try {
     const agenda = agendaFactory({ mongoConnection });
 

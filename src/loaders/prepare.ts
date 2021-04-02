@@ -7,20 +7,20 @@ import { dependencyInjector } from './dependency_injector';
 import { mongooseLoader } from './mongoose';
 import { jobsLoader } from './jobs';
 import { logger } from './logger';
-import './events'; // We have to import at least all the events once so they can be triggered
+// import './events'; // We have to import at least all the events once so they can be triggered
 
 export const prepare = async ({ app }: { app: express.Application }): Promise<void> => {
   const mongoConnection = await mongooseLoader();
   logger.info('🚀  DB loaded and connected!');
 
-  const userModel = {
-    name: 'userModel',
-    model: require('../models/user').default,
-  };
+  // const userModel = {
+  //   name: 'userModel',
+  //   model: require('../models/user').default,
+  // };
 
   const { agenda } = dependencyInjector({
     mongoConnection,
-    models: [userModel],
+    models: [],
   });
   logger.info('🚀  Dependency Injector loaded');
 

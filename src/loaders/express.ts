@@ -6,6 +6,8 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import { errorHandler } from '../core';
+import { configs } from '../configs';
+import { apis } from '../apis';
 
 export const expressLoader = ({ app }: { app: express.Application }): void => {
   // Health Check
@@ -27,7 +29,7 @@ export const expressLoader = ({ app }: { app: express.Application }): void => {
   app.use(compression());
 
   // Load API routes
-  // app.use(config.api.prefix, routes());
+  app.use(configs.api.prefix, apis());
 
   // Error handlers
   app.use(errorHandler());

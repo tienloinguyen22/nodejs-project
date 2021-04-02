@@ -1,0 +1,18 @@
+import { IsAuditable, ISODate, Genders, LoginTypes } from '../../core';
+import { Role } from '../role/role';
+
+export interface User extends IsAuditable {
+  _id: string;
+  fullName: string;
+  email: string;
+  phoneNo: string;
+  avatarUrl: string;
+  dob: ISODate;
+  address: string;
+  gender: Genders;
+  numberOfPets: number;
+  roles: Role[];
+  loginType: LoginTypes;
+  firebaseId: string;
+  isActive: boolean;
+}

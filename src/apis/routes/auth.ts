@@ -1,0 +1,64 @@
+import { Router, Response, Request, NextFunction } from 'express';
+import * as yup from 'yup';
+import { Genders, regex, validate } from '../../core';
+
+const route = Router();
+
+export const auth = (app: Router): void => {
+  app.use('/auth', route);
+
+  route.post(
+    '/sign-up',
+    validate({
+      body: {
+        idToken: yup.string().required('ID Token is required'),
+        fullName: yup
+          .string()
+          .required('Full name is required')
+          .max(50, 'Full name is too long (<= 50 characters)'),
+        email: yup
+          .string()
+          .nullable(true)
+          .test('VALID_EMAIL', 'Invalid email address', (email: string | null | undefined): boolean => {
+            if (!email) {
+              return true;
+            }
+            return regex.email.test(email);
+          }),
+        phoneNo: yup
+          .string()
+          .nullable(true)
+          .test('VALID_PHONE_NUMBER', 'Invalid phone number', (phoneNo: string | null | undefined) => {
+            if (!phoneNo) {
+              return true;
+            }
+            return regex.phoneNumber.test(phoneNo);
+          }),
+        avatarUrl: yup.string().nullable(true),
+        dob: yup
+          .string()
+          .nullable(true)
+          .test('VALID_DOB', 'Invalid dob', (dob: string | null | undefined) => {
+            if (!dob) {
+              return true;
+            }
+            return regex.isoDate.test(dob);
+          }),
+        address: yup.string().nullable(true),
+        gender: yup
+          .string()
+          .nullable(true)
+          .oneOf([Genders.FEMALE, Genders.FEMALE, Genders.OTHER], 'Invalid gender'),
+      },
+    }),
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const authService = Container.get(AuthService);
+        const { user, token } = await authService.SignUp(req.body as IUserInputDTO);
+        return res.status(201).json({ success: true });
+      } catch (e) {
+        return next(e);
+      }
+    },
+  );
+};

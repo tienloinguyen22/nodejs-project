@@ -1,4 +1,4 @@
-import { Agenda } from 'agenda';
+import Agenda from 'agenda';
 import { configs } from '../configs';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
