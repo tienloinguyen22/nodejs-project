@@ -1,4 +1,4 @@
-import { TimestampInMilliseconds } from '@app/core';
+import { TimestampInMilliseconds } from './timestamp_in_milliseconds';
 
 /**
  * Interface for auditable objects with creation & modification info

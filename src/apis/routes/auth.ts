@@ -1,6 +1,9 @@
 import { Router, Response, Request, NextFunction } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
 import { Genders, regex, validate } from '../../core';
+import { authService } from '../../services/auth';
+import { LoginPayload } from '../../types';
 
 const route = Router();
 
@@ -8,7 +11,7 @@ export const auth = (app: Router): void => {
   app.use('/auth', route);
 
   route.post(
-    '/sign-up',
+    '/login',
     validate({
       body: {
         idToken: yup.string().required('ID Token is required'),
@@ -53,9 +56,8 @@ export const auth = (app: Router): void => {
     }),
     async (req: Request, res: Response, next: NextFunction) => {
       try {
-        const authService = Container.get(AuthService);
-        const { user, token } = await authService.SignUp(req.body as IUserInputDTO);
-        return res.status(201).json({ success: true });
+        const user = await authService.login(req.body as LoginPayload);
+        return res.status(StatusCodes.OK).json(user);
       } catch (e) {
         return next(e);
       }

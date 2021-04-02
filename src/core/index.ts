@@ -15,7 +15,11 @@ export * from './interfaces/iso_date';
 export * from './interfaces/login_types';
 export * from './interfaces/mongo_repository';
 export * from './interfaces/repository_query';
+export * from './interfaces/timestamp_in_milliseconds';
 
 export * from './helpers/add_auditable_schema';
 export * from './helpers/add_deletable_schema';
 export * from './helpers/regex';
+export * from './helpers/create_object_id';
+export * from './helpers/get_current_timestamp_in_milliseconds';
+export * from './helpers/role_ids';
