@@ -902,13 +902,6 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@types/agenda@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@types/agenda/-/agenda-4.1.0.tgz#9783a0e173bf5620c42652cae6084a58728518d0"
-  integrity sha512-WKWiBRf6pqowRQxeEVSbgx9ncpcyg49r16sWP/ApwnBavgUirDY0uo1ouG3nWp5OcmBJ3oV/Q8WR6DdXQk9RaA==
-  dependencies:
-    agenda "*"
-
 "@types/body-parser@*":
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.0.tgz#0685b3c47eb3006ffed117cdd55164b61f80538f"
@@ -1229,7 +1222,7 @@ acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.0.tgz#e1ad486e6c54501634c6c397c5c121daa383607c"
   integrity sha512-+G7P8jJmCHr+S+cLfQxygbWhXy+8YTVGzAkpEbcLo2mLoL7tij/VG41QSHACSf5QgYRhMZYHuNc6drJaO0Da+w==
 
-agenda@*, "agenda@^3.1.0 || ^4.0.0", agenda@^4.1.0:
+"agenda@^3.1.0 || ^4.0.0", agenda@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/agenda/-/agenda-4.1.0.tgz#3e796a08f3609accca0a8ea9e44727e22289d835"
   integrity sha512-gAJGTB2UswCHmTEx0mZOttOsFnw2lEdKGoi8eFqmOMs/4mcE6WcbuqUCSZgSu9g9+/HC1gZmcsyJOUUdA//S0w==
