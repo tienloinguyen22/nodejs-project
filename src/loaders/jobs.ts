@@ -1,7 +1,7 @@
 import Agenda from 'agenda';
 import { configs } from '../configs';
 import { JobNames } from '../core';
-import { sendEmail } from '../jobs';
+import { sendEmail } from '../agenda-jobs';
 
 export const jobsLoader = ({ agenda }: { agenda: Agenda }): void => {
   agenda.define(
