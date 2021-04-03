@@ -22,7 +22,11 @@ export const configs = {
     user: process.env.AGENDASH_USER,
     password: process.env.AGENDASH_PWD,
   },
-  api: { prefix: '/api' },
+  api: {
+    prefix: '/api',
+    docsUrl: '/docs',
+    docsJson: '/json',
+  },
   emails: {
     apiKey: process.env.MAILGUN_API_KEY,
     domain: process.env.MAILGUN_DOMAIN,

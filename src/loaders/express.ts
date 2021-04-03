@@ -7,10 +7,13 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import agendashInitializer from 'agendash';
 import basicAuth from 'express-basic-auth';
+import swaggerUi from 'swagger-ui-express';
+import { StatusCodes } from 'http-status-codes';
 import { errorHandler } from '../core';
 import { configs } from '../configs';
 import { apis } from './apis';
 import { agendaFactory } from './agenda_factory';
+import { bulidSwaggerDocs } from './build_swagger_docs';
 
 export const expressLoader = ({ app }: { app: express.Application }): void => {
   // Health Check
@@ -30,6 +33,8 @@ export const expressLoader = ({ app }: { app: express.Application }): void => {
   app.use(helmet());
   app.use(morgan('[:date[iso]] :method :url :status :response-time ms - :res[content-length]'));
   app.use(compression());
+
+  // Agendash
   app.use(
     '/agendash',
     basicAuth({
@@ -38,6 +43,13 @@ export const expressLoader = ({ app }: { app: express.Application }): void => {
     }),
     agendashInitializer(agendaFactory()),
   );
+
+  // Swagger Docs
+  const swaggerDocument = bulidSwaggerDocs();
+  app.use(`${configs.api.prefix}${configs.api.docsUrl}`, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  app.use(`${configs.api.prefix}${configs.api.docsJson}`, async (_req, res) => {
+    res.status(StatusCodes.OK).json(swaggerDocument);
+  });
 
   // Load API routes
   app.use(configs.api.prefix, apis());

@@ -1,0 +1,15 @@
+openapi: 3.0.0
+info:
+  title: NodeJS Project
+  description: API
+  contact:
+    email: tienloinguyen22@gmail.com
+  license:
+    name: NodeJS Project
+    url: https://neoflies.com/privacy-policy
+  version: 0.1.0
+servers:
+  - url: http://localhost:3000/api
+tags:
+  - name: Auth
+    description: Auth operations
