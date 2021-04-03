@@ -1,7 +1,8 @@
 import { Router, Response, Request, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import * as yup from 'yup';
-import { Genders, regex, validate } from '../../core';
+import { EventNames, Genders, regex, validate } from '../../core';
+import { eventEmitterFactory } from '../../loaders/event_emitter_factory';
 import { LoginPayload } from './interfaces';
 import { authService } from './services';
 
@@ -9,6 +10,16 @@ const route = Router();
 
 export const auth = (app: Router): void => {
   app.use('/auth', route);
+
+  route.post('/test', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const eventEmitter = eventEmitterFactory();
+      eventEmitter.emit(EventNames.TEST);
+      return res.status(StatusCodes.OK).json({ success: true });
+    } catch (e) {
+      return next(e);
+    }
+  });
 
   route.post(
     '/login',

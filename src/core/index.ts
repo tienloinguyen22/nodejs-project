@@ -16,6 +16,7 @@ export * from './interfaces/login_types';
 export * from './interfaces/mongo_repository';
 export * from './interfaces/repository_query';
 export * from './interfaces/timestamp_in_milliseconds';
+export * from './interfaces/event_names';
 
 export * from './helpers/add_auditable_schema';
 export * from './helpers/add_deletable_schema';

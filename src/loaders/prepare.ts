@@ -8,7 +8,8 @@ import { jobsLoader } from './jobs';
 import { logger } from './logger';
 import { agendaFactory } from './agenda_factory';
 import { initializeFirebase } from './initialize_firebase';
-// import './events'; // We have to import at least all the events once so they can be triggered
+import { eventEmitterFactory } from './event_emitter_factory';
+import { eventSubscribersLoader } from './events';
 
 export const prepare = async ({ app }: { app: express.Application }): Promise<void> => {
   await mongooseLoader();
@@ -20,6 +21,10 @@ export const prepare = async ({ app }: { app: express.Application }): Promise<vo
   const agenda = agendaFactory();
   jobsLoader({ agenda });
   logger.info('🚀  Jobs loaded');
+
+  const eventEmitter = eventEmitterFactory();
+  eventSubscribersLoader(eventEmitter);
+  logger.info('🚀  Event Subscribers loaded');
 
   expressLoader({ app });
   logger.info('🚀  Express loaded');
