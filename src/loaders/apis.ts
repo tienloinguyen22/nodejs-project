@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { auth } from '../modules/auth/routes';
+import { auth } from '../modules/auth/controller';
 
 export const apis = (): Router => {
   const app = Router();
