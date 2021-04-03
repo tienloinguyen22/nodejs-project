@@ -67,6 +67,5 @@ local_storage
 uploads/*
 
 # env
-.env*
 .env
 firebase-adminsdk.json
